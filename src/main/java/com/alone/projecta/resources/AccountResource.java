@@ -20,6 +20,7 @@ public class AccountResource {
 	@Autowired
 	private AccountService service;
 	
+	//listar todas as Account com a estrutura AccountDTO
 	@GetMapping
 	public ResponseEntity<List<AccountDTO>> findAll() {
 		List<Account> list = service.findAll();
