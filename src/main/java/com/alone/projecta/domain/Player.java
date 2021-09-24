@@ -14,10 +14,10 @@ public class Player implements Serializable{
 	
 	@Id
 	private String id;
-	private String nickname;
-	private UUID uuid;
-	private Boolean playerOn;
-	private Date expiration;
+	private String nickname;//nickname do player de minecraft
+	private UUID uuid; //UUID do player do minecraft
+	private Boolean playerOn;//true para player online, false para offline(no servidor minecraft)
+	private Date expiration;//expiração do player para remocao no MongoDB
 	
 	public Player() {}
 	

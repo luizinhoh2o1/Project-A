@@ -11,6 +11,7 @@ public class AccountDTO implements Serializable{
 	private String name;
 	private String username;
 	private String email;
+	private String password;
 	
 	public AccountDTO() {}
 
@@ -19,6 +20,7 @@ public class AccountDTO implements Serializable{
 		name = obj.getName();
 		username = obj.getUsername();
 		email = obj.getEmail();
+		password = obj.getPassword();
 	}
 
 	public String getId() {
@@ -51,5 +53,13 @@ public class AccountDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

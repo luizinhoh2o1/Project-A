@@ -20,6 +20,7 @@ public class Account implements Serializable{
 	private String password;
 	private String email;
 	
+	//Lista de referencias dos servers para cada usuario
 	@DBRef(lazy=true)
 	private List<Server> servers = new ArrayList<>();
 	

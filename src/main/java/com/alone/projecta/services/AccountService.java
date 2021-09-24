@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alone.projecta.domain.Account;
+import com.alone.projecta.dto.AccountDTO;
 import com.alone.projecta.repository.AccountRepository;
 import com.alone.projecta.services.exception.ObjectNotFoundException;
 
@@ -48,5 +49,15 @@ public class AccountService {
 		newObj.setPassword(obj.getPassword());
 		newObj.setServers(obj.getServers());
 		newObj.setEmail(obj.getEmail());
+	}
+	
+	public Account fromDTO(AccountDTO objDTO) {
+		return new Account(
+			objDTO.getId(),
+			objDTO.getName(),
+			objDTO.getUsername(),
+			objDTO.getPassword(),
+			objDTO.getEmail()
+		);
 	}
 }
