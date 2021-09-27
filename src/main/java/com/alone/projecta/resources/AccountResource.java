@@ -43,6 +43,13 @@ public class AccountResource {
 		return ResponseEntity.ok().body(new AccountDTO(obj));
 	}
 	
+	//Listar Servers da Account
+	@GetMapping(value="/{id}/servers")
+	public ResponseEntity<List<Server>> findServers(@PathVariable String id) {
+		Account obj = service.findById(id);
+		return ResponseEntity.ok().body(obj.getServers());
+	}
+	
 	//Inserir uma Account no MongoDB
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody AccountDTO objDTO) {
@@ -66,12 +73,5 @@ public class AccountResource {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
-	}
-	
-	//Listar Servers da Account
-	@GetMapping(value="/{id}/servers")
-	public ResponseEntity<List<Server>> findServers(@PathVariable String id) {
-		Account obj = service.findById(id);
-		return ResponseEntity.ok().body(obj.getServers());
 	}
 }

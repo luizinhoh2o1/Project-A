@@ -1,18 +1,15 @@
-package com.alone.projecta.domain;
+package com.alone.projecta.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.alone.projecta.domain.Player;
+import com.alone.projecta.domain.Server;
 
-@Document
-public class Server implements Serializable{
+public class ServerDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@Id
 	private String id;
 	private String name;
 	private String hosting;
@@ -20,15 +17,17 @@ public class Server implements Serializable{
 	private Integer playersOnline;
 	private boolean active;
 	private List<Player> players = new ArrayList<>();
-
-	public Server() {}
 	
-	public Server(String id, String name, String hosting, String ip) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.hosting = hosting;
-		this.ip = ip;
+	public ServerDTO() {}
+	
+	public ServerDTO(Server obj) {
+		id = obj.getId();
+		name = obj.getName();
+		hosting = obj.getHosting();
+		ip = obj.getIp();
+		playersOnline = obj.getPlayersOnline();
+		active = obj.isActive();
+		players = obj.getPlayers();
 	}
 
 	public String getId() {
@@ -85,22 +84,5 @@ public class Server implements Serializable{
 
 	public void setPlayers(List<Player> players) {
 		this.players = players;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Server other = (Server) obj;
-		return Objects.equals(id, other.id);
 	}
 }
