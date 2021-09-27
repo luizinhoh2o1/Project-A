@@ -43,7 +43,7 @@ public class AccountService {
 		
 	}
 
-	private void updateData(Account newObj, Account obj) {
+	public void updateData(Account newObj, Account obj) {
 		newObj.setName(obj.getName());
 		newObj.setUsername(obj.getUsername());
 		newObj.setPassword(obj.getPassword());

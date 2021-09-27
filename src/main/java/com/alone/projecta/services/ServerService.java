@@ -43,7 +43,7 @@ public class ServerService {
 		
 	}
 	
-	private void updateData(Server newObj, Server obj) {
+	public void updateData(Server newObj, Server obj) {
 		newObj.setName(obj.getName());
 		newObj.setHosting(obj.getHosting());
 		newObj.setIp(obj.getIp());
