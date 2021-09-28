@@ -3,7 +3,6 @@ package com.alone.projecta.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,16 +14,14 @@ public class Player implements Serializable{
 	@Id
 	private String id;
 	private String nickname;//nickname do player de minecraft
-	private UUID uuid; //UUID do player do minecraft
 	private Boolean playerOn;//true para player online, false para offline(no servidor minecraft)
 	private Date expiration;//expiração do player para remocao no MongoDB
 	
 	public Player() {}
 	
-	public Player(String id, String nickname, UUID uuid, Boolean playerOn, Date expiration) {
+	public Player(String id, String nickname, Boolean playerOn, Date expiration) {
 		this.id = id;
 		this.nickname = nickname;
-		this.uuid = uuid;
 		this.playerOn = playerOn;
 		this.expiration = expiration;
 	}
@@ -43,14 +40,6 @@ public class Player implements Serializable{
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-
-	public UUID getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
 	}
 
 	public Boolean getPlayerOn() {

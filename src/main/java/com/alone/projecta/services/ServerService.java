@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alone.projecta.domain.Player;
 import com.alone.projecta.domain.Server;
 import com.alone.projecta.dto.ServerDTO;
 import com.alone.projecta.repository.ServerRepository;
@@ -41,6 +42,12 @@ public class ServerService {
 		updateData(newObj, obj);
 		return repository.save(newObj);
 		
+	}
+	
+	public Server insertPlayerServer(Player objPlayer, String id) {
+		Server newObj = findById(id);
+		newObj.getPlayers().add(objPlayer);
+		return repository.save(newObj);
 	}
 	
 	public void updateData(Server newObj, Server obj) {

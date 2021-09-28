@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alone.projecta.domain.Player;
 import com.alone.projecta.domain.Server;
+import com.alone.projecta.dto.PlayerDTO;
 import com.alone.projecta.dto.ServerDTO;
+import com.alone.projecta.services.PlayerService;
 import com.alone.projecta.services.ServerService;
 
 @RestController
@@ -22,19 +25,21 @@ import com.alone.projecta.services.ServerService;
 public class ServerResource {
 	
 	@Autowired
-	private ServerService service;
+	private ServerService serverService;
+	@Autowired
+	private PlayerService playerService;
 	
 	//Buscar server por ID
 	@GetMapping(value="/{id}")
 	public ResponseEntity<ServerDTO> findById(@PathVariable String id){
-		Server obj = service.findById(id);
+		Server obj = serverService.findById(id);
 		return ResponseEntity.ok().body(new ServerDTO(obj));
 	}
 	
 	//Listar todos os Servers
 	@GetMapping
 	public ResponseEntity<List<ServerDTO>> findAll() {
-		List<Server> list = service.findAll();
+		List<Server> list = serverService.findAll();
 		List<ServerDTO> listDTO = list.stream().map(x -> new ServerDTO(x)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 	}
@@ -42,16 +47,26 @@ public class ServerResource {
 	//Deletar Server por ID
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> deleteById(@PathVariable String id) {
-		service.deleteById(id);
+		serverService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
 
 	//Atualizar dados do Server por ID
 	@PutMapping(value="/{id}")
 	public ResponseEntity<Void> update(@RequestBody ServerDTO objDto, @PathVariable String id) {
-		Server obj = service.fromDTO(objDto);
+		Server obj = serverService.fromDTO(objDto);
 		obj.setId(id);
-		obj = service.update(obj);
+		obj = serverService.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	//Inserir Player no Server
+	@PutMapping(value="/{id}/insert-player")
+	public ResponseEntity<Void> insertPlayerServer(@RequestBody PlayerDTO objDto, @PathVariable String id) {
+		Player objPlayer = playerService.fromDTO(objDto);
+		objPlayer.setId(null);
+		objPlayer = playerService.insert(objPlayer);
+		serverService.insertPlayerServer(objPlayer, id);
 		return ResponseEntity.noContent().build();
 	}
 }

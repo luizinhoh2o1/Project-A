@@ -41,7 +41,6 @@ public class AccountService {
 		Account newObj = repository.findById(obj.getId()).get();
 		updateData(newObj, obj);
 		return repository.save(newObj);
-		
 	}
 	
 	public Account insertServerAccount(Server objServer, String id) {
