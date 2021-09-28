@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alone.projecta.domain.Account;
+import com.alone.projecta.domain.Server;
 import com.alone.projecta.dto.AccountDTO;
 import com.alone.projecta.repository.AccountRepository;
 import com.alone.projecta.services.exception.ObjectNotFoundException;
@@ -41,6 +42,12 @@ public class AccountService {
 		updateData(newObj, obj);
 		return repository.save(newObj);
 		
+	}
+	
+	public Account insertServerAccount(Server objServer, String id) {
+		Account newObj = findById(id);
+		newObj.getServers().add(objServer);
+		return repository.save(newObj);
 	}
 
 	public void updateData(Account newObj, Account obj) {

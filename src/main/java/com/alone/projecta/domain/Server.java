@@ -29,6 +29,9 @@ public class Server implements Serializable{
 		this.name = name;
 		this.hosting = hosting;
 		this.ip = ip;
+		
+		playersOnline = 0;
+		active = false;
 	}
 
 	public String getId() {
