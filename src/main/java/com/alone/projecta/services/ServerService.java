@@ -11,6 +11,7 @@ import com.alone.projecta.domain.Server;
 import com.alone.projecta.dto.ServerDTO;
 import com.alone.projecta.repository.ServerRepository;
 import com.alone.projecta.services.exception.ObjectNotFoundException;
+import com.alone.projecta.services.util.DateFormat;
 
 @Service
 public class ServerService {
@@ -46,6 +47,8 @@ public class ServerService {
 	
 	public Server insertPlayerServer(Player objPlayer, String id) {
 		Server newObj = findById(id);
+		objPlayer.setExpiration(DateFormat.getDateNow());
+		objPlayer.setId(null);
 		newObj.getPlayers().add(objPlayer);
 		return repository.save(newObj);
 	}

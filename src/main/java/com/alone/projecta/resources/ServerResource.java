@@ -64,7 +64,6 @@ public class ServerResource {
 	@PutMapping(value="/{id}/insert-player")
 	public ResponseEntity<Void> insertPlayerServer(@RequestBody PlayerDTO objDto, @PathVariable String id) {
 		Player objPlayer = playerService.fromDTO(objDto);
-		objPlayer.setId(null);
 		objPlayer = playerService.insert(objPlayer);
 		serverService.insertPlayerServer(objPlayer, id);
 		return ResponseEntity.noContent().build();

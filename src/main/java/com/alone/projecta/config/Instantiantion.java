@@ -1,10 +1,6 @@
 package com.alone.projecta.config;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +12,7 @@ import com.alone.projecta.domain.Server;
 import com.alone.projecta.repository.AccountRepository;
 import com.alone.projecta.repository.PlayerRepository;
 import com.alone.projecta.repository.ServerRepository;
+import com.alone.projecta.services.util.DateFormat;
 
 @Configuration
 public class Instantiantion implements CommandLineRunner{
@@ -29,21 +26,13 @@ public class Instantiantion implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-		
-		Date data =  new Date();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(data);
-		cal.add(Calendar.MONTH, 3);
-		data = cal.getTime(); 
 		
 		accountRepository.deleteAll();
 		serverRepository.deleteAll();
 		playerRepository.deleteAll();
 		
-		Player p1 = new Player(null, "Teddy", true, data);
-		Player p2 = new Player(null, "Tony_Gamer", true, data);
+		Player p1 = new Player(null, "Teddy", true, DateFormat.getDateNow());
+		Player p2 = new Player(null, "Tony_Gamer", true, DateFormat.getDateNow());
 		
 		Server serv1 = new Server(null, "Server One", "LocalHost Server 1", "127.0.0.1");
 		Server serv2 = new Server(null, "Server Two", "LocalHost Server 2", "127.0.0.1");
