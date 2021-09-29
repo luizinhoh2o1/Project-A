@@ -11,7 +11,6 @@ import com.alone.projecta.domain.Server;
 import com.alone.projecta.dto.ServerDTO;
 import com.alone.projecta.repository.ServerRepository;
 import com.alone.projecta.services.exception.ObjectNotFoundException;
-import com.alone.projecta.services.util.DateFormat;
 
 @Service
 public class ServerService {
@@ -26,6 +25,10 @@ public class ServerService {
 	public Server findById(String id) {
 		Optional<Server> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
+	}
+	
+	public Server findByTokenPost(String token) {
+		return repository.searchTokenPost(token);
 	}
 	
 	public Server insert(Server obj) {
@@ -45,10 +48,8 @@ public class ServerService {
 		
 	}
 	
-	public Server insertPlayerServer(Player objPlayer, String id) {
-		Server newObj = findById(id);
-		objPlayer.setExpiration(DateFormat.getDateNow());
-		objPlayer.setId(null);
+	public Server insertPlayerServer(Player objPlayer, String token) {
+		Server newObj = findByTokenPost(token);
 		newObj.getPlayers().add(objPlayer);
 		return repository.save(newObj);
 	}
@@ -65,7 +66,8 @@ public class ServerService {
 			objDTO.getId(),
 			objDTO.getName(),
 			objDTO.getHosting(),
-			objDTO.getIp()
+			objDTO.getIp(),
+			objDTO.getTokenPost()
 		);
 	}
 }

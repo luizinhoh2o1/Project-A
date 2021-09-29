@@ -16,6 +16,7 @@ public class ServerDTO implements Serializable{
 	private String ip;
 	private Integer playersOnline;
 	private boolean active;
+	private String tokenPost;
 	private List<Player> players = new ArrayList<>();
 	
 	public ServerDTO() {}
@@ -28,6 +29,7 @@ public class ServerDTO implements Serializable{
 		playersOnline = obj.getPlayersOnline();
 		active = obj.isActive();
 		players = obj.getPlayers();
+		tokenPost = obj.getTokenPost();
 	}
 
 	public String getId() {
@@ -76,6 +78,14 @@ public class ServerDTO implements Serializable{
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getTokenPost() {
+		return tokenPost;
+	}
+
+	public void setTokenPost(String tokenPost) {
+		this.tokenPost = tokenPost;
 	}
 
 	public List<Player> getPlayers() {

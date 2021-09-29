@@ -20,6 +20,7 @@ public class Server implements Serializable{
 	private String ip;
 	private Integer playersOnline;
 	private boolean active;
+	private String tokenPost;
 	
 	//Lista de referencias dos Players
 	@DBRef(lazy=true)
@@ -27,12 +28,13 @@ public class Server implements Serializable{
 
 	public Server() {}
 	
-	public Server(String id, String name, String hosting, String ip) {
+	public Server(String id, String name, String hosting, String ip, String tokenPost) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.hosting = hosting;
 		this.ip = ip;
+		this.tokenPost = tokenPost;
 		
 		playersOnline = 0;
 		active = false;
@@ -92,6 +94,14 @@ public class Server implements Serializable{
 
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+	}
+	
+	public String getTokenPost() {
+		return tokenPost;
+	}
+
+	public void setTokenPost(String tokenPost) {
+		this.tokenPost = tokenPost;
 	}
 
 	@Override

@@ -34,8 +34,8 @@ public class Instantiantion implements CommandLineRunner{
 		Player p1 = new Player(null, "Teddy", true, DateFormat.getDateNow());
 		Player p2 = new Player(null, "Tony_Gamer", true, DateFormat.getDateNow());
 		
-		Server serv1 = new Server(null, "Server One", "LocalHost Server 1", "127.0.0.1");
-		Server serv2 = new Server(null, "Server Two", "LocalHost Server 2", "127.0.0.1");
+		Server serv1 = new Server(null, "Server One", "LocalHost Server 1", "127.0.0.1", "123456");
+		Server serv2 = new Server(null, "Server Two", "LocalHost Server 2", "127.0.0.1", "789456");
 		
 		Account acc1 = new Account(null, "Alessandro", "luizinho", "123456", "alessandroluiz@gmail.com");
 		Account acc2 = new Account(null, "Pedro", "pedrinho", "123123", "pedrinho@gmail.com");

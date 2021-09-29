@@ -19,6 +19,7 @@ import com.alone.projecta.dto.PlayerDTO;
 import com.alone.projecta.dto.ServerDTO;
 import com.alone.projecta.services.PlayerService;
 import com.alone.projecta.services.ServerService;
+import com.alone.projecta.services.util.DateFormat;
 
 @RestController
 @RequestMapping(value="servers")
@@ -61,11 +62,13 @@ public class ServerResource {
 	}
 	
 	//Inserir Player no Server
-	@PutMapping(value="/{id}/insert-player")
-	public ResponseEntity<Void> insertPlayerServer(@RequestBody PlayerDTO objDto, @PathVariable String id) {
+	@PutMapping(value="/{token}/insert-player")
+	public ResponseEntity<Void> insertPlayerServer(@RequestBody PlayerDTO objDto, @PathVariable String token) {
 		Player objPlayer = playerService.fromDTO(objDto);
+		objPlayer.setId(null);
+		objPlayer.setExpiration(DateFormat.getDateNow());
 		objPlayer = playerService.insert(objPlayer);
-		serverService.insertPlayerServer(objPlayer, id);
+		serverService.insertPlayerServer(objPlayer, token);
 		return ResponseEntity.noContent().build();
 	}
 }
