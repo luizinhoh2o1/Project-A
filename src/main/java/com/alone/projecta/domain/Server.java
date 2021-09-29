@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -22,8 +21,6 @@ public class Server implements Serializable{
 	private boolean active;
 	private String tokenPost;
 	
-	//Lista de referencias dos Players
-	@DBRef(lazy=true)
 	private List<Player> players = new ArrayList<>();
 
 	public Server() {}

@@ -22,53 +22,60 @@ import com.alone.projecta.services.ServerService;
 import com.alone.projecta.services.util.DateFormat;
 
 @RestController
-@RequestMapping(value="servers")
+@RequestMapping(value = "servers")
 public class ServerResource {
-	
+
 	@Autowired
 	private ServerService serverService;
 	@Autowired
 	private PlayerService playerService;
-	
-	//Buscar server por ID
-	@GetMapping(value="/{id}")
-	public ResponseEntity<ServerDTO> findById(@PathVariable String id){
+
+	// Buscar server por ID
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<ServerDTO> findById(@PathVariable String id) {
 		Server obj = serverService.findById(id);
 		return ResponseEntity.ok().body(new ServerDTO(obj));
 	}
-	
-	//Listar todos os Servers
+
+	// Listar todos os Servers
 	@GetMapping
 	public ResponseEntity<List<ServerDTO>> findAll() {
 		List<Server> list = serverService.findAll();
 		List<ServerDTO> listDTO = list.stream().map(x -> new ServerDTO(x)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 	}
-	
-	//Deletar Server por ID
-	@DeleteMapping(value="/{id}")
+
+	// Deletar Server por ID
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteById(@PathVariable String id) {
 		serverService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
 
-	//Atualizar dados do Server por ID
-	@PutMapping(value="/{id}")
+	// Atualizar dados do Server por ID
+	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> update(@RequestBody ServerDTO objDto, @PathVariable String id) {
 		Server obj = serverService.fromDTO(objDto);
 		obj.setId(id);
 		obj = serverService.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
-	//Inserir Player no Server
-	@PutMapping(value="/{token}/insert-player")
+
+	// Inserir Player no Server
+	@PutMapping(value = "/{token}/insert-player")
 	public ResponseEntity<Void> insertPlayerServer(@RequestBody PlayerDTO objDto, @PathVariable String token) {
 		Player objPlayer = playerService.fromDTO(objDto);
-		objPlayer.setId(null);
-		objPlayer.setExpiration(DateFormat.getDateNow());
-		objPlayer = playerService.insert(objPlayer);
-		serverService.insertPlayerServer(objPlayer, token);
+
+		/*
+		 * Verifica se existe um player com o mesmo nick Se nao existir, sera criado um
+		 * novo player no DB
+		 */
+		if (!serverService.playerExists(objPlayer.getNickname())) {
+			objPlayer.setId(null);
+			objPlayer.setExpiration(DateFormat.getDateNow());
+			objPlayer = playerService.insert(objPlayer);
+			serverService.insertPlayerServer(objPlayer, token);
+		}
 		return ResponseEntity.noContent().build();
 	}
 }

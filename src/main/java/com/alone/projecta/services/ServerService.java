@@ -22,6 +22,8 @@ public class ServerService {
 		return repository.findAll();
 	}
 	
+	
+	
 	public Server findById(String id) {
 		Optional<Server> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
@@ -29,6 +31,14 @@ public class ServerService {
 	
 	public Server findByTokenPost(String token) {
 		return repository.searchTokenPost(token);
+	}
+	
+	public Boolean playerExists(String nickname) {
+		 if (repository.searchNickname(nickname) == null) {
+			 return false;
+		 } else {
+			 return true;
+		 }
 	}
 	
 	public Server insert(Server obj) {
