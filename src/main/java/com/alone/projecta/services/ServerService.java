@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alone.projecta.domain.Player;
 import com.alone.projecta.domain.Server;
+import com.alone.projecta.dto.PlayerDTO;
 import com.alone.projecta.dto.ServerDTO;
 import com.alone.projecta.repository.ServerRepository;
 import com.alone.projecta.services.exception.ObjectNotFoundException;
@@ -21,8 +21,6 @@ public class ServerService {
 	public List<Server> findAll() {
 		return repository.findAll();
 	}
-	
-	
 	
 	public Server findById(String id) {
 		Optional<Server> obj = repository.findById(id);
@@ -58,9 +56,9 @@ public class ServerService {
 		
 	}
 	
-	public Server insertPlayerServer(Player objPlayer, String token) {
+	public Server insertPlayerServer(PlayerDTO objPlayerDTO, String token) {
 		Server newObj = findByTokenPost(token);
-		newObj.getPlayers().add(objPlayer);
+		newObj.getPlayers().add(objPlayerDTO);
 		return repository.save(newObj);
 	}
 	

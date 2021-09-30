@@ -3,31 +3,19 @@ package com.alone.projecta.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.alone.projecta.domain.Player;
-
 public class PlayerDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private String id;
 	private String nickname;
 	private Boolean playerOn;
 	private Date expiration;
 	
 	public PlayerDTO() {}
 	
-	public PlayerDTO(Player obj) {
-		id = obj.getId();
-		nickname = obj.getNickname();
-		playerOn = obj.getPlayerOn();
-		expiration = obj.getExpiration();
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+	public PlayerDTO(String nickname, Boolean playerOn, Date expiration) {
+		this.nickname = nickname;
+		this.playerOn = playerOn;
+		this.expiration = expiration;
 	}
 
 	public String getNickname() {

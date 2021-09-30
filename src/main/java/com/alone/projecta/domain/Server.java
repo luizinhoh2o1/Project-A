@@ -8,6 +8,8 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.alone.projecta.dto.PlayerDTO;
+
 @Document
 public class Server implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -21,7 +23,7 @@ public class Server implements Serializable{
 	private boolean active;
 	private String tokenPost;
 	
-	private List<Player> players = new ArrayList<>();
+	private List<PlayerDTO> players = new ArrayList<>();
 
 	public Server() {}
 	
@@ -85,11 +87,11 @@ public class Server implements Serializable{
 		this.active = active;
 	}
 
-	public List<Player> getPlayers() {
+	public List<PlayerDTO> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(List<PlayerDTO> players) {
 		this.players = players;
 	}
 	

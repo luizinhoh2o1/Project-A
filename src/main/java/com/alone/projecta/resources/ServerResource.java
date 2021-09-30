@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alone.projecta.domain.Player;
 import com.alone.projecta.domain.Server;
 import com.alone.projecta.dto.PlayerDTO;
 import com.alone.projecta.dto.ServerDTO;
-import com.alone.projecta.services.PlayerService;
 import com.alone.projecta.services.ServerService;
-import com.alone.projecta.services.util.DateFormat;
+import com.alone.projecta.services.util.GenerateCurrentDate;
 
 @RestController
 @RequestMapping(value = "servers")
@@ -27,8 +25,8 @@ public class ServerResource {
 
 	@Autowired
 	private ServerService serverService;
-	@Autowired
-	private PlayerService playerService;
+	
+	private Integer defaultMonthsExpire = 3;
 
 	// Buscar server por ID
 	@GetMapping(value = "/{id}")
@@ -64,17 +62,13 @@ public class ServerResource {
 	// Inserir Player no Server
 	@PutMapping(value = "/{token}/insert-player")
 	public ResponseEntity<Void> insertPlayerServer(@RequestBody PlayerDTO objDto, @PathVariable String token) {
-		Player objPlayer = playerService.fromDTO(objDto);
-
 		/*
 		 * Verifica se existe um player com o mesmo nick Se nao existir, sera criado um
 		 * novo player no DB
 		 */
-		if (!serverService.playerExists(objPlayer.getNickname())) {
-			objPlayer.setId(null);
-			objPlayer.setExpiration(DateFormat.getDateNow());
-			objPlayer = playerService.insert(objPlayer);
-			serverService.insertPlayerServer(objPlayer, token);
+		if (!serverService.playerExists(objDto.getNickname())) {
+			objDto.setExpiration(GenerateCurrentDate.getCurrentDateAndExtendMonths(defaultMonthsExpire));
+			serverService.insertPlayerServer(objDto, token);
 		}
 		return ResponseEntity.noContent().build();
 	}

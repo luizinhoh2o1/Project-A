@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alone.projecta.domain.Player;
 import com.alone.projecta.domain.Server;
 
 public class ServerDTO implements Serializable{
@@ -17,7 +16,7 @@ public class ServerDTO implements Serializable{
 	private Integer playersOnline;
 	private boolean active;
 	private String tokenPost;
-	private List<Player> players = new ArrayList<>();
+	private List<PlayerDTO> players = new ArrayList<>();
 	
 	public ServerDTO() {}
 	
@@ -88,11 +87,11 @@ public class ServerDTO implements Serializable{
 		this.tokenPost = tokenPost;
 	}
 
-	public List<Player> getPlayers() {
+	public List<PlayerDTO> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(List<PlayerDTO> players) {
 		this.players = players;
 	}
 }
