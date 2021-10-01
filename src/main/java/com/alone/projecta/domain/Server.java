@@ -8,35 +8,35 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.alone.projecta.dto.CommandToServerDTO;
 import com.alone.projecta.dto.PlayerDTO;
 
 @Document
-public class Server implements Serializable{
+public class Server implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
 	private String name;
 	private String hosting;
 	private String ip;
-	private Integer playersOnline;
-	private boolean active;
-	private String tokenPost;
-	
+	private String token;
+	private CommandToServerDTO cmdToServer = new CommandToServerDTO();
+
 	private List<PlayerDTO> players = new ArrayList<>();
 
-	public Server() {}
-	
-	public Server(String id, String name, String hosting, String ip, String tokenPost) {
-		super();
+	public Server() {
+	}
+
+	public Server(String id, String name, String hosting, String ip, String token) {
 		this.id = id;
 		this.name = name;
 		this.hosting = hosting;
 		this.ip = ip;
-		this.tokenPost = tokenPost;
-		
-		playersOnline = 0;
-		active = false;
+		this.token = token;
+
+		cmdToServer.setServerToken(token);
+		cmdToServer.setCommand("");
 	}
 
 	public String getId() {
@@ -71,22 +71,6 @@ public class Server implements Serializable{
 		this.ip = ip;
 	}
 
-	public Integer getPlayersOnline() {
-		return playersOnline;
-	}
-
-	public void setPlayersOnline(Integer playersOnline) {
-		this.playersOnline = playersOnline;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
 	public List<PlayerDTO> getPlayers() {
 		return players;
 	}
@@ -94,13 +78,21 @@ public class Server implements Serializable{
 	public void setPlayers(List<PlayerDTO> players) {
 		this.players = players;
 	}
-	
-	public String getTokenPost() {
-		return tokenPost;
+
+	public String getToken() {
+		return token;
 	}
 
 	public void setTokenPost(String tokenPost) {
-		this.tokenPost = tokenPost;
+		this.token = tokenPost;
+	}
+
+	public CommandToServerDTO getCmdToServer() {
+		return cmdToServer;
+	}
+
+	public void setCmdToServer(CommandToServerDTO cmdToServer) {
+		this.cmdToServer = cmdToServer;
 	}
 
 	@Override

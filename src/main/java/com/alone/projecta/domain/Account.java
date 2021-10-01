@@ -18,12 +18,12 @@ public class Account implements Serializable{
 	private String username;
 	private String password;
 	private String email;
+	
 	private List<Server> servers = new ArrayList<>();
 	
 	public Account() {}
 
 	public Account(String id, String name, String username, String password, String email) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.username = username;

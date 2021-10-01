@@ -27,8 +27,8 @@ public class Instantiantion implements CommandLineRunner{
 		accountRepository.deleteAll();
 		serverRepository.deleteAll();
 		
-		PlayerDTO p1 = new PlayerDTO("Teddy", true, GenerateCurrentDate.getCurrentDateAndExtendMonths(3));
-		PlayerDTO p2 = new PlayerDTO("Tony_Gamer", true, GenerateCurrentDate.getCurrentDateAndExtendMonths(3));
+		PlayerDTO p1 = new PlayerDTO("Teddy", GenerateCurrentDate.getCurrentDateAndExtendMonths(3));
+		PlayerDTO p2 = new PlayerDTO("Tony_Gamer", GenerateCurrentDate.getCurrentDateAndExtendMonths(3));
 		
 		Server serv1 = new Server(null, "Server One", "LocalHost Server 1", "127.0.0.1", "123456");
 		Server serv2 = new Server(null, "Server Two", "LocalHost Server 2", "127.0.0.1", "789456");

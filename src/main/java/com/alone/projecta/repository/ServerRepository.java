@@ -8,11 +8,11 @@ import com.alone.projecta.domain.Server;
 import com.alone.projecta.dto.PlayerDTO;
 
 @Repository
-public interface ServerRepository extends MongoRepository<Server, String>{
-	
-	@Query("{ 'tokenPost': {$regex: ?0, $options: 'i'} }")
-	Server searchTokenPost(String token);
-	
+public interface ServerRepository extends MongoRepository<Server, String> {
+
+	@Query("{ 'token': {$regex: ?0, $options: 'i'} }")
+	Server searchTokenServer(String token);
+
 	@Query("{ 'players.nickname': {$regex: ?0, $options: 'i'} }")
 	PlayerDTO searchNickname(String nickname);
 }

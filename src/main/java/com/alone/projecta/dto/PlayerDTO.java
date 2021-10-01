@@ -7,14 +7,12 @@ public class PlayerDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String nickname;
-	private Boolean playerOn;
 	private Date expiration;
 	
 	public PlayerDTO() {}
 	
-	public PlayerDTO(String nickname, Boolean playerOn, Date expiration) {
+	public PlayerDTO(String nickname, Date expiration) {
 		this.nickname = nickname;
-		this.playerOn = playerOn;
 		this.expiration = expiration;
 	}
 
@@ -24,14 +22,6 @@ public class PlayerDTO implements Serializable{
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-
-	public Boolean getPlayerOn() {
-		return playerOn;
-	}
-
-	public void setPlayerOn(Boolean playerOn) {
-		this.playerOn = playerOn;
 	}
 
 	public Date getExpiration() {

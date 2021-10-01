@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alone.projecta.domain.Server;
+import com.alone.projecta.dto.CommandToServerDTO;
 import com.alone.projecta.dto.PlayerDTO;
 import com.alone.projecta.dto.ServerDTO;
 import com.alone.projecta.services.ServerService;
@@ -25,7 +26,7 @@ public class ServerResource {
 
 	@Autowired
 	private ServerService serverService;
-	
+
 	private Integer defaultMonthsExpire = 3;
 
 	// Buscar server por ID
@@ -33,6 +34,26 @@ public class ServerResource {
 	public ResponseEntity<ServerDTO> findById(@PathVariable String id) {
 		Server obj = serverService.findById(id);
 		return ResponseEntity.ok().body(new ServerDTO(obj));
+	}
+
+	// Inserir command no server
+	@PutMapping(value = "/{token}/insert-command")
+	public ResponseEntity<Void> insertCommandToServer(@RequestBody CommandToServerDTO objCmdDTO,
+			@PathVariable String token) {
+		Server obj = serverService.findByTokenServer(token);
+		obj.setCmdToServer(objCmdDTO);
+		serverService.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+
+	// Buscar command e remover command
+	@GetMapping(value = "/{token}/get-command")
+	public ResponseEntity<CommandToServerDTO> getCommandToServer(@PathVariable String token) {
+		Server obj = serverService.findByTokenServer(token);
+		CommandToServerDTO command = obj.getCmdToServer();
+		obj.getCmdToServer().setCommand("");
+		serverService.update(obj);
+		return ResponseEntity.ok().body(command);
 	}
 
 	// Listar todos os Servers
