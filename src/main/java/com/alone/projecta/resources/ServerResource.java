@@ -38,11 +38,8 @@ public class ServerResource {
 
 	// Inserir command no server
 	@PutMapping(value = "/{token}/insert-command")
-	public ResponseEntity<Void> insertCommandToServer(@RequestBody CommandToServerDTO objCmdDTO,
-			@PathVariable String token) {
-		Server obj = serverService.findByTokenServer(token);
-		obj.setCmdToServer(objCmdDTO);
-		serverService.update(obj);
+	public ResponseEntity<Void> insertCommandToServer(@RequestBody CommandToServerDTO objCmdDTO, @PathVariable String token) {
+		serverService.insertCommandToServer(objCmdDTO, token);
 		return ResponseEntity.noContent().build();
 	}
 
@@ -51,8 +48,10 @@ public class ServerResource {
 	public ResponseEntity<CommandToServerDTO> getCommandToServer(@PathVariable String token) {
 		Server obj = serverService.findByTokenServer(token);
 		CommandToServerDTO command = obj.getCmdToServer();
-		obj.getCmdToServer().setCommand("");
-		serverService.update(obj);
+		if (command.getCommand() != "") {
+			obj.getCmdToServer().setCommand("");
+			serverService.update(obj);
+		}
 		return ResponseEntity.ok().body(command);
 	}
 

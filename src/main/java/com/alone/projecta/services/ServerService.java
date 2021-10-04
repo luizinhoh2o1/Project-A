@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alone.projecta.domain.Server;
+import com.alone.projecta.dto.CommandToServerDTO;
 import com.alone.projecta.dto.PlayerDTO;
 import com.alone.projecta.dto.ServerDTO;
 import com.alone.projecta.repository.ServerRepository;
@@ -61,15 +62,15 @@ public class ServerService {
 	}
 
 	public Server insertPlayerServer(PlayerDTO objPlayerDTO, String token) {
-		Server newObj = findByTokenServer(token);
-		newObj.getPlayers().add(objPlayerDTO);
-		return repository.save(newObj);
+		Server obj = findByTokenServer(token);
+		obj.getPlayers().add(objPlayerDTO);
+		return repository.save(obj);
 	}
 
-	public Server insertCommandToServer(String command, String token) {
-		Server newObj = findByTokenServer(token);
-		newObj.getCmdToServer().getCommand();
-		return repository.save(newObj);
+	public Server insertCommandToServer(CommandToServerDTO commandDto, String token) {
+		Server obj = findByTokenServer(token);
+		obj.getCmdToServer().setCommand(commandDto.getCommand());
+		return repository.save(obj);
 	}
 
 	public Server removeCommandToServer(String token) {

@@ -35,7 +35,6 @@ public class Server implements Serializable {
 		this.ip = ip;
 		this.token = token;
 
-		cmdToServer.setServerToken(token);
 		cmdToServer.setCommand("");
 	}
 
