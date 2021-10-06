@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.alone.projecta.domain.Server;
 import com.alone.projecta.dto.CommandToServerDTO;
@@ -26,6 +27,8 @@ public class ServerResource {
 
 	@Autowired
 	private ServerService serverService;
+	@Autowired
+	private RestTemplate restTemplate;
 
 	private Integer defaultMonthsExpire = 3;
 
@@ -91,5 +94,13 @@ public class ServerResource {
 			serverService.insertPlayerServer(objDto, token);
 		}
 		return ResponseEntity.noContent().build();
+	}
+	
+	// Consome API e retorna status do server
+	@GetMapping("/server-status/{ip}")
+	public ResponseEntity<Object> getStatus(@PathVariable String ip) {
+		String url = "https://api.mcsrvstat.us/2/" + ip;
+		Object obj = restTemplate.getForObject(url, Object.class);
+		return ResponseEntity.ok().body(obj);
 	}
 }
