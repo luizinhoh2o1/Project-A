@@ -7,5 +7,5 @@ import com.alone.projecta.domain.Account;
 
 @Repository
 public interface AccountRepository extends MongoRepository<Account, String>{
-
+	Account findByUsername(String username);
 }

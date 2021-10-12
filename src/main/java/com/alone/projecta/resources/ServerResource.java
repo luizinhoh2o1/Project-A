@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -86,7 +88,7 @@ public class ServerResource {
 	@PutMapping(value = "/{token}/insert-player")
 	public ResponseEntity<Void> insertPlayerServer(@RequestBody PlayerDTO objDto, @PathVariable String token) {
 		/*
-		 * Verifica se existe um player com o mesmo nick Se nao existir, sera criado um
+		 * Verifica se existe um player com o mesmo nick se nao existir, sera criado um
 		 * novo player no DB
 		 */
 		if (!serverService.playerExists(objDto.getNickname())) {
@@ -98,7 +100,7 @@ public class ServerResource {
 	
 	// Consome API e retorna status do server
 	@GetMapping("/server-status/{ip}")
-	public ResponseEntity<Object> getStatus(@PathVariable String ip) {
+	public ResponseEntity<Object> getStatus(@PathVariable String ip, @AuthenticationPrincipal UserDetails userDetails) {
 		String url = "https://api.mcsrvstat.us/2/" + ip;
 		Object obj = restTemplate.getForObject(url, Object.class);
 		return ResponseEntity.ok().body(obj);

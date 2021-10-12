@@ -24,6 +24,8 @@ public class Instantiantion implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		String passwordTest = "$2a$10$gDRiyxbQQKsMQNeWwQaltu4GxIQ5gEdowS4T3idZPa6lzztlWVkAG"; // 123
+		
 		accountRepository.deleteAll();
 		serverRepository.deleteAll();
 		
@@ -33,8 +35,8 @@ public class Instantiantion implements CommandLineRunner{
 		Server serv1 = new Server(null, "Server One", "LocalHost Server 1", "127.0.0.1", "123456");
 		Server serv2 = new Server(null, "Server Two", "LocalHost Server 2", "127.0.0.1", "789456");
 		
-		Account acc1 = new Account(null, "Alessandro", "luizinho", "123456", "alessandroluiz@gmail.com");
-		Account acc2 = new Account(null, "Pedro", "pedrinho", "123123", "pedrinho@gmail.com");
+		Account acc1 = new Account(null, "Alessandro", "luizinho", passwordTest, "alessandroluiz@gmail.com");
+		Account acc2 = new Account(null, "Pedro", "pedrinho", passwordTest, "pedrinho@gmail.com");
 		
 		serv1.getPlayers().addAll(Arrays.asList(p1, p2));
 		serverRepository.saveAll(Arrays.asList(serv1, serv2));

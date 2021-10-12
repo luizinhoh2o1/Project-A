@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -15,6 +16,7 @@ public class Account implements Serializable{
 	@Id
 	private String id;
 	private String name;
+	@Indexed(unique=true)
 	private String username;
 	private String password;
 	private String email;
