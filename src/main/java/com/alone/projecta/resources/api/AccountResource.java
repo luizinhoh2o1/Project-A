@@ -1,4 +1,4 @@
-package com.alone.projecta.resources;
+package com.alone.projecta.resources.api;
 
 import java.net.URI;
 import java.util.List;

@@ -6,21 +6,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.alone.projecta.services.CustomUserDetailsService;
 
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.anyRequest().authenticated()
-				.and()
-				.httpBasic();
+		http.csrf().disable().authorizeRequests()
+			.antMatchers("/").permitAll()
+			.antMatchers("/list-servers").permitAll()
+			.anyRequest().authenticated()
+			.and().formLogin().permitAll()
+			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+			
 	}
 	
 	@Override

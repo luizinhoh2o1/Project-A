@@ -1,4 +1,4 @@
-package com.alone.projecta.resources;
+package com.alone.projecta.resources.api;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +24,7 @@ import com.alone.projecta.services.ServerService;
 import com.alone.projecta.services.util.GenerateCurrentDate;
 
 @RestController
-@RequestMapping(value = "servers")
+@RequestMapping(value = "/servers")
 public class ServerResource {
 
 	@Autowired
