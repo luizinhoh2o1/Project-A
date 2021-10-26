@@ -1,4 +1,4 @@
-package com.alone.projecta.resources;
+package com.alone.projecta.resources.pages;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

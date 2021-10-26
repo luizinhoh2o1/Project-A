@@ -27,6 +27,14 @@ public class AccountService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
 	}
 	
+	public Account findByUsername(String username) {
+		return repository.findByUsername(username);
+	}
+	
+	public List<Server> findAllServersAccount(String username) {
+		return findByUsername(username).getServers();
+	}
+	
 	public Account insert(Account obj) {
 		return repository.insert(obj);
 	}
