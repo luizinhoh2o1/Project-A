@@ -3,6 +3,7 @@ package com.alone.projecta.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,12 +20,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
+			
+			// open pages
 			.antMatchers("/").permitAll()
-			.antMatchers("/list-servers").permitAll()
+			//.and().authorizeRequests().antMatchers("/css/**").permitAll()
+			//.and().authorizeRequests().antMatchers("/img/**").permitAll()
+		
+			// restricted pages
+			.antMatchers("/list-servers").hasAnyRole("USER", "ADM")
+			.antMatchers("/client-panel").hasAnyRole("USER", "ADM")
+			
+			// temporary login page
 			.anyRequest().authenticated()
 			.and().formLogin().permitAll()
-			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			
+			// default page after successful authentication
+			.and().formLogin().defaultSuccessUrl("/client-panel", true)
+			
+			// default page access failure
+			.and().exceptionHandling().accessDeniedPage("/disabled");
+			
+	}
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception{
+		web.ignoring().antMatchers("/css/**", "/img/**", "/js/**");
 	}
 	
 	@Override

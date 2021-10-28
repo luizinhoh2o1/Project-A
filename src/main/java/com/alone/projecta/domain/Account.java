@@ -10,27 +10,32 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Account implements Serializable{
+public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String id;
 	private String name;
-	@Indexed(unique=true)
+	@Indexed(unique = true)
 	private String username;
 	private String password;
 	private String email;
-	
-	private List<Server> servers = new ArrayList<>();
-	
-	public Account() {}
+	private boolean admin;
+	private boolean active;
 
-	public Account(String id, String name, String username, String password, String email) {
+	private List<Server> servers = new ArrayList<>();
+
+	public Account() {
+	}
+
+	public Account(String id, String name, String username, String password, String email, boolean admin, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.admin = admin;
+		this.active = active;
 	}
 
 	public String getId() {
@@ -79,6 +84,22 @@ public class Account implements Serializable{
 
 	public void setServers(List<Server> servers) {
 		this.servers = servers;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	@Override

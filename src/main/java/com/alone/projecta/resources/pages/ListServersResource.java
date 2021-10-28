@@ -22,7 +22,7 @@ public class ListServersResource {
 		String username = auth.getName();
 		
 		ModelAndView modelAndView = new ModelAndView();
-	    modelAndView.setViewName("list-servers");
+	    modelAndView.setViewName("pages-client/list-servers.html");
 	    modelAndView.addObject("servers", accountService.findAllServersAccount(username));
 	    return modelAndView;
 	}

@@ -15,19 +15,23 @@ import com.alone.projecta.domain.Account;
 import com.alone.projecta.repository.AccountRepository;
 
 @Component
-public class CustomUserDetailsService implements UserDetailsService{
-	
+public class CustomUserDetailsService implements UserDetailsService {
+
 	private final AccountRepository accountRepositosry;
-	
+
 	@Autowired
 	public CustomUserDetailsService(AccountRepository accountRepository) {
 		this.accountRepositosry = accountRepository;
 	}
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Account acc = Optional.ofNullable(accountRepositosry.findByUsername(username)).orElseThrow(() -> new UsernameNotFoundException("Account Not Found!"));
+		Account acc = Optional.ofNullable(accountRepositosry.findByUsername(username))
+				.orElseThrow(() -> new UsernameNotFoundException("Account Not Found!"));
 		List<GrantedAuthority> authorityListUser = AuthorityUtils.createAuthorityList("ROLE_USER");
-		return new org.springframework.security.core.userdetails.User(acc.getUsername(), acc.getPassword(), authorityListUser);
+		List<GrantedAuthority> authorityListDisabled = AuthorityUtils.createAuthorityList("ROLE_DIS");
+		List<GrantedAuthority> authorityListAdmin = AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_ADM");
+		return new org.springframework.security.core.userdetails.User(acc.getUsername(), acc.getPassword(),
+				acc.isActive() ? (acc.isAdmin() ? authorityListAdmin : authorityListUser) : (authorityListDisabled));
 	}
 }

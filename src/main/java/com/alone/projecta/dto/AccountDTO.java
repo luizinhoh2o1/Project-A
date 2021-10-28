@@ -4,16 +4,19 @@ import java.io.Serializable;
 
 import com.alone.projecta.domain.Account;
 
-public class AccountDTO implements Serializable{
+public class AccountDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id;
 	private String name;
 	private String username;
 	private String email;
 	private String password;
-	
-	public AccountDTO() {}
+	private boolean admin;
+	private boolean active;
+
+	public AccountDTO() {
+	}
 
 	public AccountDTO(Account obj) {
 		id = obj.getId();
@@ -21,6 +24,8 @@ public class AccountDTO implements Serializable{
 		username = obj.getUsername();
 		email = obj.getEmail();
 		password = obj.getPassword();
+		admin = obj.isAdmin();
+		active = obj.isActive();
 	}
 
 	public String getId() {
@@ -61,5 +66,21 @@ public class AccountDTO implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 }

@@ -71,7 +71,9 @@ public class AccountService {
 			objDTO.getName(),
 			objDTO.getUsername(),
 			objDTO.getPassword(),
-			objDTO.getEmail()
+			objDTO.getEmail(),
+			objDTO.isAdmin(),
+			objDTO.isActive()
 		);
 	}
 }

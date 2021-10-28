@@ -2,23 +2,24 @@
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Project A</title>
         <meta name="author" content="Alessandro Mota">
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
         <script src="https://kit.fontawesome.com/fcc10091e5.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <h1>Lista de servidores</h1>
         <table class="table table-dark">
-        	<thread>
+        	<thead>
 	        	<tr>
 	        		<th scope="col">Name</th>
 	        		<th scope="col">Host</th>
 	        		<th scope="col">IP</th>
 	        	</tr>
-        	</thread>
-        	<thread>
+        	</thead>
+        	<thead>
 	        	<tbody>
 		        	<tr th:each="server: ${servers}">
 		        		<td th:text="${server.name}"/>
@@ -26,7 +27,7 @@
 		        		<td th:text="${server.ip}"/>
 		        	</tr>
 	        	</tbody>
-        	</thread>
+        	</thead>
         </table>
     </body>
 </html>
