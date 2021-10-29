@@ -1,8 +1,8 @@
-/*========RESET========*/
+/* RESET */
 
 * {
 	margin: 0;
-	padding: 0;
+	padding: 2%;
 	font-size: 100%;
 	border: none;
 	outline: none;
@@ -11,12 +11,12 @@
 	font-family: 'Lato', sans-serif;
 }
 
-body {background-color: rgb(202, 202, 202);}
+body {background-color: rgb(255, 255, 255);}
 a {text-decoration: none;}
 ul {list-style: none;}
 img {max-width: 100%;}
 
-/*========HEADER========*/
+/* HEADER */
 
 .header {
 	width: 100%;
@@ -27,7 +27,58 @@ img {max-width: 100%;}
 .logo {
 	width: 56px;
 	height: 56px;
-	float: left;
+	float: right;
 	background: url(../img/logo.png) center center/56px no-repeat;
 	font-size: 0;
+}
+
+.btn-menu {
+	width: 56px;
+	height: 56px;
+	float: left;
+	text-align: center;
+	color: #fff;
+	border-radius: 56px;
+	cursor: pointer;
+	background: linear-gradient(to right, rgb(128, 255, 0), rgb(0, 255, 255));
+}
+
+/* MENU */
+
+.menu {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background-color: rgba(100,100,100,0.9);
+	top: 0;
+	left: 0;
+}
+
+.menu ul {
+	width: 100%;
+	float: left;
+	text-align: center;
+}
+
+.menu li {
+	padding: 1.5%;
+}
+
+.menu a {
+	color: rgb(255, 255, 255);
+	font-size: 2em;
+	padding: 1.5%, 2%;
+}
+
+.menu a:hover {
+	border: 1px solid rgb(0, 255, 64);
+	text-decoration-line: none;
+}
+
+.btn-close {
+	font-size: 3em;
+	color: #fff;
+	float: left;
+	cursor: pointer;
+	margin-right: 2%;
 }
