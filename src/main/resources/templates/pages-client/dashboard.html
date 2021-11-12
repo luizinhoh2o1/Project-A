@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Painel</title>
+	<meta name="author" content="Alessandro Mota">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://kit.fontawesome.com/fcc10091e5.js" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('current', {'packages': ['corechart']});
+		google.charts.setOnLoadCallback(drawChart);
+
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+				['Dia', 'Jogadores'],
+				['Domingo', 260],
+				['Segunda', 2000],
+				['Terça', 500],
+				['Quarta', 230],
+				['Quinta', 50],
+				['Sexta', 900],
+				['Sábado', 260]
+			]);
+
+			var options = {
+				title: 'Performace do servidor',
+				hAxis: {title: 'Semana', titleTextStyle: {color: '#333'}},
+				vAxis: {minValue: 0}
+			};
+
+			var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		}
+	</script>
+	
+
+</head>
+
+<body>
+	<h1>Dashboard</h1>
+	<div id="chart_div" style="width: 900px; height: 500px;"></div>
+</body>
+
+</html>

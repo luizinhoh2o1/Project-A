@@ -1,8 +1,6 @@
 package com.alone.projecta.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.alone.projecta.domain.Server;
 
@@ -14,7 +12,6 @@ public class ServerDTO implements Serializable{
 	private String hosting;
 	private String ip;
 	private String token;
-	private List<PlayerDTO> players = new ArrayList<>();
 	
 	public ServerDTO() {}
 	
@@ -23,7 +20,6 @@ public class ServerDTO implements Serializable{
 		name = obj.getName();
 		hosting = obj.getHosting();
 		ip = obj.getIp();
-		players = obj.getPlayers();
 		token = obj.getToken();
 	}
 
@@ -65,13 +61,5 @@ public class ServerDTO implements Serializable{
 
 	public void setToken(String token) {
 		this.token = token;
-	}
-
-	public List<PlayerDTO> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List<PlayerDTO> players) {
-		this.players = players;
 	}
 }

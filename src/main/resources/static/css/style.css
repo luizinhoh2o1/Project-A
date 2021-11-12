@@ -2,7 +2,7 @@
 
 * {
 	margin: 0;
-	padding: 2%;
+	padding: 0.2%;
 	font-size: 100%;
 	border: none;
 	outline: none;
@@ -24,13 +24,28 @@ img {max-width: 100%;}
 	padding: 3%, 4%;
 }
 
-.logo {
-	width: 56px;
-	height: 56px;
+.btn-login {
+	border: 56px;
 	float: right;
-	background: url(../img/logo.png) center center/56px no-repeat;
-	font-size: 0;
+	font-size: 2em;
+	color: white;
+	text-shadow: 0px 0px 9px black;
+	background: linear-gradient(to right, rgb(128, 255, 0), rgb(0, 255, 255));
 }
+.btn-signup {
+	border: 56px;
+	float: right;
+	font-size: 2em;
+	color: white;
+	text-shadow: 0px 0px 9px black;
+	font-size: 2em;
+	margin-right: 0.5%;
+	background: linear-gradient(to right, rgb(128, 255, 0), rgb(0, 255, 255));
+}
+
+
+
+/* MENU */
 
 .btn-menu {
 	width: 56px;
@@ -38,14 +53,13 @@ img {max-width: 100%;}
 	float: left;
 	text-align: center;
 	color: #fff;
-	border-radius: 56px;
+	border: 56px;
 	cursor: pointer;
 	background: linear-gradient(to right, rgb(128, 255, 0), rgb(0, 255, 255));
 }
 
-/* MENU */
-
 .menu {
+	display: none;
 	width: 100%;
 	height: 100%;
 	position: fixed;
@@ -61,13 +75,13 @@ img {max-width: 100%;}
 }
 
 .menu li {
-	padding: 1.5%;
+	padding: 0.5%;
 }
 
 .menu a {
 	color: rgb(255, 255, 255);
 	font-size: 2em;
-	padding: 1.5%, 2%;
+	padding: 0.5%, 0.5%;
 }
 
 .menu a:hover {
@@ -81,4 +95,15 @@ img {max-width: 100%;}
 	float: left;
 	cursor: pointer;
 	margin-right: 2%;
+}
+
+/* BANNER */
+
+.banner {
+	width: 100%;
+	float: left;
+	text-align: center;
+	padding: 3% 4%;
+	background: linear-gradient(to right, rgb(0, 255, 255), rgb(128, 255, 0));
+	box-shadow: 0px 0px 10px rgb(128, 128, 128);
 }

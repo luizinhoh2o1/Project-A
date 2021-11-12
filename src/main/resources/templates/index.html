@@ -14,7 +14,10 @@
     </head>
     <body>
     	<header class="header">
-    		<a href="/"><h1 class="logo"> Mine Analytics </h1></a>
+    		<!-- Login button -->
+    		<a class="btn-login" th:href="@{/login}">Entrar</a>
+    		<a class="btn-signup" th:href="@{/register}">Cadastrar</a>
+    		<!-- Menu button -->
     		<button class="btn-menu"><i class="fa fa-bars fa-lg"></i></button>
     		<nav class="menu">
     			<a class="btn-close"><i class="fas fa-angle-double-left"></i></a>
@@ -27,8 +30,24 @@
     				<li><a href="#">Quem somos</a></li>
     			</ul>
     		</nav>
-    		
     	</header>
     	
+    	<div class="banner"> 
+    		<div class="title">
+    			<h2>Use tecnologias a seu favor!</h2>
+    			<h3>Veja seu servidor de Minecraft de outra forma!</h3>
+    		</div>
+    	</div>
+    	
+    	<script src="js/jquery-3.6.0.min.js"></script>
+    	<script>
+    		$(".btn-menu").click(function() {
+				$(".menu").show();
+			});
+			
+			$(".btn-close").click(function() {
+				$(".menu").hide();
+			});
+    	</script>
     </body>
 </html>

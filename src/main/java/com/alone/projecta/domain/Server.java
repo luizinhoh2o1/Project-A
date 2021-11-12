@@ -1,15 +1,12 @@
 package com.alone.projecta.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.alone.projecta.dto.CommandToServerDTO;
-import com.alone.projecta.dto.PlayerDTO;
 
 @Document
 public class Server implements Serializable {
@@ -22,8 +19,6 @@ public class Server implements Serializable {
 	private String ip;
 	private String token;
 	private CommandToServerDTO cmdToServer = new CommandToServerDTO();
-
-	private List<PlayerDTO> players = new ArrayList<>();
 
 	public Server() {
 	}
@@ -68,14 +63,6 @@ public class Server implements Serializable {
 
 	public void setIp(String ip) {
 		this.ip = ip;
-	}
-
-	public List<PlayerDTO> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List<PlayerDTO> players) {
-		this.players = players;
 	}
 
 	public String getToken() {

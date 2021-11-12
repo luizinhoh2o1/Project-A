@@ -18,10 +18,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.alone.projecta.domain.Server;
 import com.alone.projecta.dto.CommandToServerDTO;
-import com.alone.projecta.dto.PlayerDTO;
 import com.alone.projecta.dto.ServerDTO;
 import com.alone.projecta.services.ServerService;
-import com.alone.projecta.services.util.GenerateCurrentDate;
 
 @RestController
 @RequestMapping(value = "/servers")
@@ -31,8 +29,6 @@ public class ServerResource {
 	private ServerService serverService;
 	@Autowired
 	private RestTemplate restTemplate;
-
-	private Integer defaultMonthsExpire = 3;
 
 	// Buscar server por ID
 	@GetMapping(value = "/{id}")
@@ -84,20 +80,6 @@ public class ServerResource {
 		return ResponseEntity.noContent().build();
 	}
 
-	// Inserir Player no Server
-	@PutMapping(value = "/{token}/insert-player")
-	public ResponseEntity<Void> insertPlayerServer(@RequestBody PlayerDTO objDto, @PathVariable String token) {
-		/*
-		 * Verifica se existe um player com o mesmo nick se nao existir, sera criado um
-		 * novo player no DB
-		 */
-		if (!serverService.playerExists(objDto.getNickname())) {
-			objDto.setExpiration(GenerateCurrentDate.getCurrentDateAndExtendMonths(defaultMonthsExpire));
-			serverService.insertPlayerServer(objDto, token);
-		}
-		return ResponseEntity.noContent().build();
-	}
-	
 	// Consome API e retorna status do server
 	@GetMapping("/server-status/{ip}")
 	public ResponseEntity<Object> getStatus(@PathVariable String ip, @AuthenticationPrincipal UserDetails userDetails) {

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.alone.projecta.domain.Server;
 import com.alone.projecta.dto.CommandToServerDTO;
-import com.alone.projecta.dto.PlayerDTO;
 import com.alone.projecta.dto.ServerDTO;
 import com.alone.projecta.repository.ServerRepository;
 import com.alone.projecta.services.exception.ObjectNotFoundException;
@@ -28,21 +27,8 @@ public class ServerService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
 	}
 
-	public PlayerDTO findPlayerByNickname(String nickname) {
-		Optional<PlayerDTO> obj = Optional.ofNullable(repository.searchNickname(nickname));
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
-	}
-
 	public Server findByTokenServer(String token) {
 		return repository.searchTokenServer(token);
-	}
-
-	public Boolean playerExists(String nickname) {
-		if (repository.searchNickname(nickname) == null) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 
 	public Server insert(Server obj) {
@@ -61,12 +47,6 @@ public class ServerService {
 		return repository.save(newObj);
 	}
 
-	public Server insertPlayerServer(PlayerDTO objPlayerDTO, String token) {
-		Server obj = findByTokenServer(token);
-		obj.getPlayers().add(objPlayerDTO);
-		return repository.save(obj);
-	}
-
 	public Server insertCommandToServer(CommandToServerDTO commandDto, String token) {
 		Server obj = findByTokenServer(token);
 		obj.getCmdToServer().setCommand(commandDto.getCommand());
@@ -83,7 +63,6 @@ public class ServerService {
 		newObj.setName(obj.getName());
 		newObj.setHosting(obj.getHosting());
 		newObj.setIp(obj.getIp());
-		newObj.setPlayers(obj.getPlayers());
 	}
 
 	public Server fromDTO(ServerDTO objDTO) {

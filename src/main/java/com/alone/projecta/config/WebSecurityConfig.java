@@ -23,8 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			
 			// open pages
 			.antMatchers("/").permitAll()
-			//.and().authorizeRequests().antMatchers("/css/**").permitAll()
-			//.and().authorizeRequests().antMatchers("/img/**").permitAll()
 		
 			// restricted pages
 			.antMatchers("/list-servers").hasAnyRole("USER", "ADM")
@@ -36,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			
 			// default page after successful authentication
-			.and().formLogin().defaultSuccessUrl("/client-panel", true)
+			.and().formLogin().defaultSuccessUrl("/dashboard", true)
 			
 			// default page access failure
 			.and().exceptionHandling().accessDeniedPage("/disabled");
