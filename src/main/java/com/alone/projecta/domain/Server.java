@@ -1,6 +1,8 @@
 package com.alone.projecta.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
@@ -19,6 +21,7 @@ public class Server implements Serializable {
 	private String ip;
 	private String token;
 	private CommandToServerDTO cmdToServer = new CommandToServerDTO();
+	private List<DailyReport> dailyReportList = new ArrayList<>();
 
 	public Server() {
 	}
@@ -30,7 +33,7 @@ public class Server implements Serializable {
 		this.ip = ip;
 		this.token = token;
 
-		cmdToServer.setCommand("");
+		cmdToServer.setCommand(""); 
 	}
 
 	public String getId() {
@@ -79,6 +82,14 @@ public class Server implements Serializable {
 
 	public void setCmdToServer(CommandToServerDTO cmdToServer) {
 		this.cmdToServer = cmdToServer;
+	}
+
+	public List<DailyReport> getDailyReportList() {
+		return dailyReportList;
+	}
+
+	public void setDailyReportList(List<DailyReport> dailyReportList) {
+		this.dailyReportList = dailyReportList;
 	}
 
 	@Override
