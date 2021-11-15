@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.alone.projecta.dto.CommandToServerDTO;
@@ -21,6 +22,7 @@ public class Server implements Serializable {
 	private String ip;
 	private String token;
 	private CommandToServerDTO cmdToServer = new CommandToServerDTO();
+	@DBRef
 	private List<DailyReport> dailyReportList = new ArrayList<>();
 
 	public Server() {

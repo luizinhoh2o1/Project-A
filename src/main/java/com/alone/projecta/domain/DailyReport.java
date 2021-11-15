@@ -38,7 +38,7 @@ public class DailyReport implements Serializable {
 		return reportDate;
 	}
 
-	public void setReportDate(Date reportDate) {
+	public void setReportCalendar(Date reportDate) {
 		this.reportDate = reportDate;
 	}
 
